@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>حملة الإشراق – الأجواء الذهبية × بوابة السما</title>
+    <title>حملة الإشراق – الأجواء الذهبية • بوابة السماء</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@500;700&display=swap"
       rel="stylesheet"
@@ -675,9 +675,16 @@
           filter: none;
         }
       }
+      
     </style>
-  </head>
+    <style>
+#snd{position:fixed;bottom:18px;left:18px;z-index:9999;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.55);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(6px)}
+    </style>
+
+</head>
   <body>
+<audio id="nasheed" src="nasheed.mp3" loop preload="auto"></audio>
+<button id="snd" aria-label="تشغيل/إيقاف الصوت">🔊</button>
     <div class="grain"></div>
     <div class="spot" id="sp"></div>
     <nav id="nav">
@@ -711,7 +718,7 @@
       </div>
       <div class="cta">
         <a class="b" href="#price">الأسعار</a
-        ><a class="b o" href="https://wa.me/963936653587">واتساب</a>
+        ><a class="b o" href="https://wa.me/963967556616">واتساب</a>
       </div>
       <div class="mq"><div id="mq"></div></div>
     </header>
@@ -810,13 +817,13 @@
         <div class="t f rv">
           <div class="tp"><span>DAMASCUS → MAKKAH</span><span>21/11</span></div>
           <h3>ثلاثي</h3>
-          <div class="pr">$<span data-n="600">0</span></div>
+          <div class="pr">$<span data-n="550">0</span></div>
           <small>للشخص · 11 ليلة</small>
         </div>
         <div class="t rv">
           <div class="tp"><span>DAMASCUS → MAKKAH</span><span>21/11</span></div>
           <h3>ثنائي</h3>
-          <div class="pr">$<span data-n="700">0</span></div>
+          <div class="pr">$<span data-n="600">0</span></div>
           <small>للشخص · 11 ليلة</small>
         </div>
       </div>
@@ -892,10 +899,10 @@
         <div><b id="h2">0</b><small>ساعة</small></div>
         <div><b id="m2">0</b><small>دقيقة</small></div>
       </div>
-      <a class="num rv" href="tel:+963936653587">+963 93 66 535 87</a>
+      <a class="num rv" href="tel:+963967556616"> +963967556616 </a>
       <div class="rv">
-        <a class="b" href="https://wa.me/963936653587">واتساب</a>
-        <a class="b o" href="tel:+963936653587">اتصال</a>
+        <a class="b" href="https://wa.me/963967556616">واتساب</a>
+        <a class="b o" href="tel:+963967556616">اتصال</a>
       </div>
     </section>
 
@@ -910,7 +917,7 @@
       />
     </div>
     <footer>© جميع الحقوق محفوظة لدى حملة الإشراق </footer>
-    <a class="wa" href="https://wa.me/963936653587" aria-label="واتساب">💬</a>
+    <a class="wa" href="https://wa.me/963967556616" aria-label="واتساب">💬</a>
 
     <script>
       // تم إضافة صور ممتازة للغرف (4 لمكة و 4 للمدينة)
@@ -1030,5 +1037,27 @@ var IMGS = {
         }, 4200);
       });
     </script>
+  <script>
+(function(){
+  var a=document.getElementById("nasheed"),b=document.getElementById("snd");
+  a.volume=0.5;
+  function upd(){b.textContent=a.paused?"🔇":"🔊";}
+  function play(){return a.play().then(upd).catch(function(){upd();});}
+  b.addEventListener("click",function(e){e.stopPropagation();a.paused?play():a.pause();upd();});
+  a.play().then(upd).catch(function(){
+    upd();
+    var ev=["pointerdown","pointerup","mousedown","click","touchstart","touchend","keydown"];
+    function once(e){
+      if(e.target===b)return;
+      if(!a.paused)return;
+      ev.forEach(function(n){removeEventListener(n,once,true);});
+      play();
+    }
+    ev.forEach(function(n){addEventListener(n,once,true);});
+  });
+  a.addEventListener("error",function(){b.textContent="⚠️";b.title="ملف nasheed.mp3 غير موجود";console.error("nasheed.mp3 not found / cannot load");});
+  a.addEventListener("pause",upd);a.addEventListener("play",upd);
+})();
+</script>
   </body>
 </html>
